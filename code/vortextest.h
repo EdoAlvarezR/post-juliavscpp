@@ -84,10 +84,12 @@ void P2P(Particle * P, const int numParticles) {
       if (r!=0){
           ros = r/P[j].sigma;
 
-          // u(x) = ∑g_σ(x−xp) K(x−xp) × Γp
+          // Evaluate g_σ and ∂gσ∂r
           aux = pow(ros*ros + 1.0, 2.5);
           g_sgm = ros*ros*ros * (ros*ros + 2.5) / aux;
           dgdr = 7.5 * ros*ros / ( aux * (ros*ros + 1.0) );
+
+          // u(x) = ∑g_σ(x−xp) K(x−xp) × Γp
           aux = (- const4 / (r*r*r)) * g_sgm;
           P[i].U[0] += ( dX[1]*P[j].Gamma[2] - dX[2]*P[j].Gamma[1] ) * aux;
           P[i].U[1] += ( dX[2]*P[j].Gamma[0] - dX[0]*P[j].Gamma[2] ) * aux;
