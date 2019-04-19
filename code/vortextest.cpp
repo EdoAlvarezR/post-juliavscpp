@@ -1,10 +1,10 @@
-// compile as `g++ -std=c++14 -o vortextest vortextest.cpp`
+// compile as `g++ -std=c++14 -ffast-math -funroll-loops -O3 -o vortextest vortextest.cpp`
 #include "vortextest.h"
 
 int main() {                        // Program entry point
 
   int ntests = 100;
-  int n = 3;
+  int n = 5;
   float_t lambda = 1.5;
 
   std::vector<real_t> res;
@@ -20,7 +20,8 @@ int main() {                        // Program entry point
   if (true) printUJ(&(particles[0]), n*n*n);
 
   res = benchmarkP2P(ntests, &(particles[0]), n*n*n);
-  cout << "\nSamples:\t" << ntests << "\n";
+  cout << "\nProblem size:\t" << n*n*n << "\n";
+  cout << "Samples:\t" << ntests << "\n";
   cout << "min time:\t" << res[0] << " ms" << "\n";
   cout << "ave time:\t" << res[1] << " ms" << "\n";
   cout << "max time:\t" << res[2] << " ms" << "\n";
